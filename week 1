@@ -1,12 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
 class Account {
     int accountNo;
     String name;
     String accountType;
     double balance;
-
     Account(int accountNo, String name, String accountType, double balance) {
         this.accountNo = accountNo;
         this.name = name;
@@ -14,13 +12,9 @@ class Account {
         this.balance = balance;
     }
 }
-
 public class BankingSystem {
-
     static ArrayList<Account> accounts = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
-
-    // Find account
     static Account findAccount(int accountNo) {
         for (Account acc : accounts) {
             if (acc.accountNo == accountNo) {
@@ -29,39 +23,27 @@ public class BankingSystem {
         }
         return null;
     }
-
-    // Create Account
     static void createAccount() {
         System.out.print("Enter Account Number: ");
         int accountNo = sc.nextInt();
-
         sc.nextLine();
         System.out.print("Enter Name: ");
         String name = sc.nextLine();
-
         System.out.print("Enter Account Type: ");
         String type = sc.nextLine();
-
         System.out.print("Enter Initial Balance: ");
         double balance = sc.nextDouble();
-
         Account acc = new Account(accountNo, name, type, balance);
         accounts.add(acc);
-
         System.out.println("Account created successfully!");
     }
-
-    // Deposit
     static void deposit() {
         System.out.print("Enter Account Number: ");
         int accountNo = sc.nextInt();
-
         Account acc = findAccount(accountNo);
-
         if (acc != null) {
             System.out.print("Enter Deposit Amount: ");
             double amount = sc.nextDouble();
-
             if (amount > 0) {
                 acc.balance += amount;
                 System.out.println("Amount deposited successfully!");
@@ -73,18 +55,13 @@ public class BankingSystem {
             System.out.println("Account not found!");
         }
     }
-
-    // Withdraw
     static void withdraw() {
         System.out.print("Enter Account Number: ");
         int accountNo = sc.nextInt();
-
         Account acc = findAccount(accountNo);
-
         if (acc != null) {
             System.out.print("Enter Withdrawal Amount: ");
             double amount = sc.nextDouble();
-
             if (amount > 0 && amount <= acc.balance) {
                 acc.balance -= amount;
                 System.out.println("Amount withdrawn successfully!");
@@ -96,14 +73,10 @@ public class BankingSystem {
             System.out.println("Account not found!");
         }
     }
-
-    // Check Balance
     static void checkBalance() {
         System.out.print("Enter Account Number: ");
         int accountNo = sc.nextInt();
-
         Account acc = findAccount(accountNo);
-
         if (acc != null) {
             System.out.println("Account Holder: " + acc.name);
             System.out.println("Balance: " + acc.balance);
@@ -111,26 +84,19 @@ public class BankingSystem {
             System.out.println("Account not found!");
         }
     }
-
-    // Transfer Money
     static void transferMoney() {
         System.out.print("Enter Sender Account Number: ");
         int senderNo = sc.nextInt();
-
         System.out.print("Enter Receiver Account Number: ");
         int receiverNo = sc.nextInt();
-
         Account sender = findAccount(senderNo);
         Account receiver = findAccount(receiverNo);
-
         if (sender != null && receiver != null) {
             System.out.print("Enter Transfer Amount: ");
             double amount = sc.nextDouble();
-
             if (amount > 0 && amount <= sender.balance) {
                 sender.balance -= amount;
                 receiver.balance += amount;
-
                 System.out.println("Money transferred successfully!");
             } else {
                 System.out.println("Insufficient balance or invalid amount!");
@@ -139,14 +105,10 @@ public class BankingSystem {
             System.out.println("Sender or receiver account not found!");
         }
     }
-
-    // View Account Details
     static void viewAccount() {
         System.out.print("Enter Account Number: ");
         int accountNo = sc.nextInt();
-
         Account acc = findAccount(accountNo);
-
         if (acc != null) {
             System.out.println("\n----- Account Details -----");
             System.out.println("Account Number : " + acc.accountNo);
@@ -157,11 +119,8 @@ public class BankingSystem {
             System.out.println("Account not found!");
         }
     }
-
     public static void main(String[] args) {
-
         int choice;
-
         do {
             System.out.println("\n===== BANKING SYSTEM =====");
             System.out.println("1. Create Account");
@@ -171,46 +130,34 @@ public class BankingSystem {
             System.out.println("5. Transfer Money");
             System.out.println("6. View Account Details");
             System.out.println("7. Exit");
-
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
-
             switch (choice) {
-
                 case 1:
                     createAccount();
                     break;
-
                 case 2:
                     deposit();
                     break;
-
                 case 3:
                     withdraw();
                     break;
-
                 case 4:
                     checkBalance();
                     break;
-
                 case 5:
                     transferMoney();
                     break;
-
                 case 6:
                     viewAccount();
                     break;
-
                 case 7:
                     System.out.println("Thank you for using Banking System!");
                     break;
-
                 default:
                     System.out.println("Invalid choice!");
             }
-
         } while (choice != 7);
-
         sc.close();
     }
 }
